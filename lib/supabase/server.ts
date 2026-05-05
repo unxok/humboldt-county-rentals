@@ -17,8 +17,10 @@ export async function createClient() {
         getAll() {
           return cookieStore.getAll();
         },
+        // @ts-ignore TODO
         setAll(cookiesToSet) {
           try {
+            // @ts-ignore TODO
             cookiesToSet.forEach(({ name, value, options }) =>
               cookieStore.set(name, value, options),
             );

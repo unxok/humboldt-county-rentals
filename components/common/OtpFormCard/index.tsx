@@ -27,7 +27,13 @@ export const OtpFormCard = ({
   title: string;
   description: string;
   email: string;
-  type: EmailOtpType;
+  type:
+    | "email"
+    | "signup"
+    | "invite"
+    | "magiclink"
+    | "recovery"
+    | "email_change";
 }) => {
   const [token, setToken] = useState("");
   const resend = useMutation({

@@ -1,11 +1,10 @@
 import { updateSession } from "@/lib/supabase/middleware";
 import { tryCatch } from "@/lib/utils";
-import { type NextRequest } from "next/server";
 
-export async function middleware(request: NextRequest) {
+export async function middleware() {
   // update user's auth session
   console.log("middleware start");
-  const result = await tryCatch(updateSession(request));
+  const result = await tryCatch(updateSession());
   if (!result.success) {
     console.error("middleware error: ", result.error);
     return;

@@ -19,7 +19,11 @@ export const getOwnUsername = async (): Promise<string | null> => {
   const getUser = getUserResult.data;
   if (getUser.error) return null;
   const { id } = getUser.data.user;
-  const getUsername = await db.from("profiles").select("username").eq("id", id);
+  const getUsername = await db
+    .schema("public")
+    .from("profiles")
+    .select("username")
+    .eq("id", id);
   if (getUsername.error || !getUsername.data[0]) return null;
   return getUsername.data[0].username;
 };
@@ -44,7 +48,11 @@ export const getOwnUser = async (): Promise<{
   }
   const { user } = getUser.data;
   const { id } = user;
-  const getUsername = await db.from("profiles").select("username").eq("id", id);
+  const getUsername = await db
+    .schema("public")
+    .from("profiles")
+    .select("username")
+    .eq("id", id);
   if (getUsername.error) {
     throw new Error(getUsername.error.message);
   }
